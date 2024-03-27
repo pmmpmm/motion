@@ -7,7 +7,77 @@
     <script type="module" src="./build/main.js"></script>
     <title>Document</title>
   </head>
-  <body class="">
-    <p class="text-red-600">MOTION MOTION</p>
+  <body>
+    <div class="dialogue">
+      <div class="dialogue-Cont">
+        <div>
+          <button class="del-btn">삭제</button>
+        </div>
+        <form action="" class="form-Ar">
+          <div class="inp-Ar">
+            <div>
+              <label for="">Title</label>
+              <input type="text" />
+            </div>
+            <div>
+              <label for="">URL</label>
+              <input type="text" />
+            </div>
+          </div>
+          <div class="btn-Ar">
+            <button type="submit" class="btn">ADD</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="container-Ar">
+      <header class="header">
+        <h1 class="title">motion</h1>
+        <ul class="ctrl-btn-list">
+          <li class="btn-list"><button class="btn">image</button></li>
+          <li class="btn-list"><button class="btn">video</button></li>
+          <li class="btn-list"><button class="btn">note</button></li>
+          <li class="btn-list"><button class="btn">task</button></li>
+        </ul>
+      </header>
+      <section class="content">
+        <ul class="content-list">
+          <li class="list visual">
+            <div class="content-Box">
+              <div class="visual-Ar">
+                <!-- <img src="https://picsum.photos/400/220" alt="" /> -->
+              </div>
+              <div class="tx-Ar">
+                <h2 class="title">image</h2>
+              </div>
+            </div>
+            <button class="del-btn">삭제</button>
+          </li>
+          <li class="list">
+            <div class="content-Box">
+              <div class="tx-Ar">
+                <h2 class="title">note</h2>
+                <div class="tx-box">
+                  <p class="tx">note body</p>
+                </div>
+              </div>
+            </div>
+            <button class="del-btn">삭제</button>
+          </li>
+          <li class="list">
+            <div class="content-Box">
+              <div class="tx-Ar">
+                <h2 class="title">task</h2>
+                <div class="tx-box">
+                  <label for=""><input type="checkbox" />task body</label>
+                </div>
+              </div>
+            </div>
+            <button class="del-btn">삭제</button>
+          </li>
+        </ul>
+      </section>
+      <footer></footer>
+    </div>
   </body>
 </html>

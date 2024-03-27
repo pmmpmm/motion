@@ -544,14 +544,116 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
-.text-red-600 {
-  --tw-text-opacity: 1;
-  color: rgb(220 38 38 / var(--tw-text-opacity));
+/* npx tailwindcss -i ./css/input.css -o ./css/output.css --watch */
+
+.del-btn {
+  height: 2rem;
+  width: 2rem;
+  font-size: 0;
+  background-color: red;
 }
 
 body {
+  box-sizing: content-box;
+  min-width: 1024px;
   --tw-bg-opacity: 1;
-  background-color: rgb(51 65 85 / var(--tw-bg-opacity));
+  background-color: rgb(31 41 55 / var(--tw-bg-opacity));
+  padding: 4rem;
   --tw-text-opacity: 1;
-  color: rgb(194 65 12 / var(--tw-text-opacity));
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.container-Ar {
+  margin-left: auto;
+  margin-right: auto;
+  width: 1024px;
+  --tw-bg-opacity: 1;
+  background-color: rgb(17 24 39 / var(--tw-bg-opacity));
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.header {
+  text-align: center;
+}
+
+.header .title {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.header .ctrl-btn-list {
+  display: flex;
+  justify-content: center;
+}
+
+.header .ctrl-btn-list .btn-list {
+  margin-left: 0.75rem;
+  margin-right: 0.75rem;
+}
+
+.content {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.content-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.content-list .list {
+  display: flex;
+  flex-wrap: nowrap;
+  --tw-bg-opacity: 1;
+  background-color: rgb(3 7 18 / var(--tw-bg-opacity));
+  padding: 1rem;
+}
+
+.content-list .list .content-Box {
+  width: 100%;
+}
+
+.content-list .list.visual .content-Box {
+  display: flex;
+  -moz-column-gap: 1rem;
+       column-gap: 1rem;
+}
+
+.content-list .list .del-btn {
+  flex: none;
+}
+
+.dialogue {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.dialogue::after {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: -10;
+  display: block;
+  height: 100%;
+  width: 100%;
+  background-color: rgb(17 24 39 / 0.6);
+  --tw-content: '';
+  content: var(--tw-content);
+}
+
+.dialogue-Cont {
+  display: inline-block;
+  --tw-bg-opacity: 1;
+  background-color: rgb(75 85 99 / var(--tw-bg-opacity));
+  padding: 2rem;
 }
