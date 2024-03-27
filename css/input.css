@@ -2,6 +2,56 @@
 @tailwind components;
 @tailwind utilities;
 
+/* npx tailwindcss -i ./css/input.css -o ./css/output.css --watch */
+
+.del-btn {
+  @apply w-8 h-8 text-[0];
+  background-color: red;
+}
+
 body {
-  @apply bg-slate-700 text-orange-700;
+  @apply min-w-[1024px] p-16 bg-gray-800 text-white box-content;
+}
+.container-Ar {
+  @apply w-[1024px] mx-auto px-8 py-4 bg-gray-900;
+}
+
+.header {
+  @apply text-center;
+}
+.header .title {
+  @apply text-xl;
+}
+.header .ctrl-btn-list {
+  @apply flex justify-center;
+}
+.header .ctrl-btn-list .btn-list {
+  @apply mx-3;
+}
+.content {
+  @apply py-4;
+}
+
+.content-list {
+  @apply flex flex-col gap-4;
+}
+.content-list .list {
+  @apply flex flex-nowrap p-4 bg-gray-950;
+}
+.content-list .list .content-Box {
+  @apply w-full;
+}
+.content-list .list.visual .content-Box {
+  @apply flex gap-x-4;
+}
+
+.content-list .list .del-btn {
+  @apply flex-none;
+}
+.dialogue {
+  @apply flex justify-center items-center w-full h-full fixed top-0 left-0;
+  @apply after:content-[''] after:block after:w-full after:h-full after:bg-gray-900/[0.6] after:absolute after:top-0 after:left-0 after:-z-10;
+}
+.dialogue-Cont {
+  @apply inline-block p-8 bg-gray-600;
 }
