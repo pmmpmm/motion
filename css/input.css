@@ -5,6 +5,16 @@
 :root {
   --color-basic: @apply bg-basic;
 }
+@layer components {
+  .dialogue-pop {
+    z-index: -1;
+    opacity: 0;
+  }
+  .dialogue-pop.open {
+    z-index: 100;
+    opacity: 1;
+  }
+}
 @layer utilities {
   .scrollbar::-webkit-scrollbar {
     width: 14px;
