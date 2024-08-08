@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --color-basic: @apply bg-basic;
+}
+@layer utilities {
+  .scrollbar::-webkit-scrollbar {
+    width: 14px;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    border-radius: 7px;
+    background: #f7f8f9;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    background: #dbdcdf;
+    border-radius: 100vh;
+    border: 3px solid #f7f8f9;
+  }
+}
