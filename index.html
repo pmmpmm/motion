@@ -3,16 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script type="module" src="./build/main.js"></script>
-    <script type="module" src="./build/dialogue.js"></script>
+    <!-- <script type="module" src="./build/main.js"></script> -->
+    <script type="module" src="./build/dialog.js"></script>
+    <script type="module" src="./build/createList.js"></script>
     <link href="./css/output.css" rel="stylesheet" />
     <title>Motion</title>
   </head>
   <body class="h-screen">
+    <!-- 다이얼로그 -->
     <div
       class="dialogue-pop flex justify-center items-center w-full h-full fixed top-0 left-0 -z-10 opacity-0 before:content-[''] before:block before:w-full before:h-full before:bg-black/[0.3] before:fixed before:top-0 before:left-0 before:-z-10 before:backdrop-blur-sm"
     >
-      <div class="w-[520px] px-5 pt-10 pb-5 bg-white shadow-lg relative">
+      <div class="dialogue-input-area w-[520px] px-5 pt-10 pb-5 bg-white shadow-lg relative">
         <button class="closeBtn text-[0px] absolute top-4 right-4">
           삭제<svg
             class="fill-basic-40"
@@ -29,7 +31,7 @@
             ></path>
           </svg>
         </button>
-        <div class="dialogue-input-field flex flex-col gap-4">
+        <!-- <div class="dialogue-input-field flex flex-col gap-4">
           <div>
             <label for="title" class="block pb-1 font-medium">TITLE</label>
             <input
@@ -38,9 +40,9 @@
               class="block w-full px-4 py-2 border border-solid border-inherit"
             />
           </div>
-        </div>
+        </div> -->
         <div class="mt-4 text-right">
-          <button class="px-4 py-1.5 font-bold text-basic-100 bg-point-100">ADD</button>
+          <button class="addBtn px-4 py-1.5 font-bold text-basic-100 bg-point-100">ADD</button>
         </div>
       </div>
     </div>
@@ -67,7 +69,7 @@
             </div>
           </header>
           <div class="h-[calc(100%-176px)] px-7 pt-0 pb-9 overflow-auto scrollbar">
-            <ul class="flex flex-col gap-2">
+            <ul class="list-wrap flex flex-col gap-2">
               <li class="flex justify-between items-center gap-2 p-6 bg-white shadow-lg">
                 <div class="flex gap-4 w-full">
                   <div class="basis-1/2 aspect-video">
