@@ -3,12 +3,38 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="./build/main.js"></script>
-    <script type="module" src="./build/dialogue.js"></script>
-    <link href="./css/output.css" rel="stylesheet" />
+    <script type="module" src="./dist/app.js"></script>
+    <link href="./style/output.css" rel="stylesheet" />
     <title>Motion</title>
   </head>
-  <body>
-    <p class="text-2xl">Hello World</p>
+  <body class="h-screen">
+    <div class="w-full h-full bg-white">
+      <div
+        class="flex justify-center items-start m-auto w-full max-w-6xl min-w-[720px] h-full p-12"
+      >
+        <div class="w-full h-full bg-[#f5f7fa]">
+          <header class="flex flex-col px-5 pt-9 pb-7 text-center">
+            <h1 class="text-5xl font-bold mb-7 text-basic-100">MOTION</h1>
+            <div class="dialogue-btns flex justify-center gap-2">
+              <button name="image" class="py-2 px-6 text-sm font-bold text-basic-100 bg-point-100">
+                IMAGE
+              </button>
+              <button name="video" class="py-2 px-6 text-sm font-bold text-basic-100 bg-point-100">
+                VIDEO
+              </button>
+              <button name="note" class="py-2 px-6 text-sm font-bold text-basic-100 bg-point-100">
+                NOTE
+              </button>
+              <button name="task" class="py-2 px-6 text-sm font-bold text-basic-100 bg-point-100">
+                TASK
+              </button>
+            </div>
+          </header>
+          <div class="h-[calc(100%-176px)] px-7 pt-0 pb-9 overflow-auto scrollbar">
+            <ul class="list-wrap flex flex-col gap-2"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
