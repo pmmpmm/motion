@@ -4,11 +4,21 @@ interface Composable extends Component {
   addChild(child: Component): void;
 }
 
-export class PageItemComponent extends BaseComponent implements Composable {
+type OnCloseListener = () => void;
+
+interface SectionContainer extends Component, Composable {
+  setOnCloseListener(listener: OnCloseListener): void;
+}
+type SectionContainerConstructor = {
+  new (): SectionContainer;
+};
+
+export class PageItemComponent extends BaseComponent implements SectionContainer {
+  private closelistener?: OnCloseListener;
   constructor() {
     super(`
       <li class="list flex justify-between items-center gap-2 p-6 bg-white shadow-lg">
-        <button class="list-del-btn text-[0px]">삭제
+        <button class="close-btn text-[0px]">삭제
           <svg
             class="fill-basic-40 pointer-events-none"
             stroke="currentColor"
@@ -22,21 +32,29 @@ export class PageItemComponent extends BaseComponent implements Composable {
           </svg>
         </button>
       </li>`);
+    const closeBtn = this.element.querySelector('.close-btn') as HTMLButtonElement;
+    closeBtn.onclick = () => {
+      this.closelistener && this.closelistener();
+    };
   }
   addChild(child: Component) {
     child.attachTo(this.element, 'afterbegin');
   }
+  setOnCloseListener(listener: OnCloseListener) {
+    this.closelistener = listener;
+  }
 }
 
 export class PageComponent extends BaseComponent implements Composable {
-  constructor() {
+  constructor(private pageItemComponent: SectionContainerConstructor) {
     super(`<ul class="list-wrap flex flex-col gap-2"></ul>`);
   }
   addChild(section: Component) {
-    const item = new PageItemComponent();
+    const item = new this.pageItemComponent();
     item.addChild(section);
     item.attachTo(this.element, 'afterbegin');
-
-    // this.pageItemComponent.addChild(item);
+    item.setOnCloseListener(() => {
+      item.removeFrom(this.element);
+    });
   }
 }

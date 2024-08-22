@@ -2,11 +2,11 @@ import { ImageComponent } from './components/page/item/image.js';
 import { NoteComponent } from './components/page/item/note.js';
 import { TaskComponent } from './components/page/item/task.js';
 import { VideoComponent } from './components/page/item/video.js';
-import { PageComponent } from './components/page/page.js';
+import { PageComponent, PageItemComponent } from './components/page/page.js';
 
 class App {
   constructor(appRoot: HTMLElement) {
-    const page = new PageComponent();
+    const page = new PageComponent(PageItemComponent);
     page.attachTo(appRoot);
 
     const image = new ImageComponent('Image Title', 'https://picsum.photos/200/300');
