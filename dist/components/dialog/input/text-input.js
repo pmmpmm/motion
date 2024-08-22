@@ -15,4 +15,12 @@ export class TextInput extends BaseComponent {
         </div>
       </div>`);
     }
+    get title() {
+        const title = this.element.querySelector('#text-title');
+        return title.value;
+    }
+    get body() {
+        const body = this.element.querySelector('#text-body');
+        return body.value;
+    }
 }

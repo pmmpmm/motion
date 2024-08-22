@@ -8,41 +8,29 @@ import { VideoComponent } from './components/page/item/video.js';
 import { PageComponent, PageItemComponent } from './components/page/page.js';
 class App {
     constructor(appRoot, dialogRoot) {
-        const page = new PageComponent(PageItemComponent);
-        page.attachTo(appRoot);
-        const image = new ImageComponent('Image Title', 'https://picsum.photos/200/300');
-        const video = new VideoComponent('Video Title', 'https://youtu.be/Tm9urFnu7rw?si=Ii3IJXvqLBu3xQIB');
-        const note = new NoteComponent('Note Title', 'note text content');
-        const task = new TaskComponent('Task Title', 'task text content');
-        page.addChild(image);
-        page.addChild(video);
-        page.addChild(note);
-        page.addChild(task);
-        const imageBtn = document.querySelector('#new-image');
-        imageBtn.addEventListener('click', () => {
+        this.dialogRoot = dialogRoot;
+        this.page = new PageComponent(PageItemComponent);
+        this.page.attachTo(appRoot);
+        this.bindElementToDialog('#new-image', MediaInput, (MediaInput) => new ImageComponent(MediaInput.title, MediaInput.url));
+        this.bindElementToDialog('#new-video', MediaInput, (MediaInput) => new VideoComponent(MediaInput.title, MediaInput.url));
+        this.bindElementToDialog('#new-note', TextInput, (TextInput) => new NoteComponent(TextInput.title, TextInput.body));
+        this.bindElementToDialog('#new-task', TextInput, (TextInput) => new TaskComponent(TextInput.title, TextInput.body));
+    }
+    bindElementToDialog(selector, InputComponent, makeListComponent) {
+        const element = document.querySelector(selector);
+        element.addEventListener('click', () => {
             const dialog = new InputDialog();
-            const mediaInput = new MediaInput();
-            dialog.setOnCloseListener(() => {
-                dialog.removeFrom(dialogRoot);
-            });
+            const input = new InputComponent();
+            dialog.addChild(input);
+            dialog.attachTo(this.dialogRoot);
             dialog.setOnSubmitListener(() => {
-                dialog.removeFrom(dialogRoot);
+                dialog.removeFrom(this.dialogRoot);
+                const list = makeListComponent(input);
+                this.page.addChild(list);
             });
-            dialog.addChild(mediaInput);
-            dialog.attachTo(dialogRoot);
-        });
-        const noteBtn = document.querySelector('#new-note');
-        noteBtn.addEventListener('click', () => {
-            const dialog = new InputDialog();
-            const textInput = new TextInput();
             dialog.setOnCloseListener(() => {
-                dialog.removeFrom(dialogRoot);
+                dialog.removeFrom(this.dialogRoot);
             });
-            dialog.setOnSubmitListener(() => {
-                dialog.removeFrom(dialogRoot);
-            });
-            dialog.addChild(textInput);
-            dialog.attachTo(dialogRoot);
         });
     }
 }
