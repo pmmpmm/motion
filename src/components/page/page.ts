@@ -1,8 +1,4 @@
-import { BaseComponent, Component } from '../base.js';
-
-interface Composable extends Component {
-  addChild(child: Component): void;
-}
+import { BaseComponent, Component, Composable } from '../base.js';
 
 type OnCloseListener = () => void;
 
