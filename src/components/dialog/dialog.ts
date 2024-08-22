@@ -3,10 +3,6 @@ import { BaseComponent, Component, Composable } from '../base.js';
 type OnCloseListener = () => void;
 type OnSubmitListener = () => void;
 
-// interface InputDialogConstructor {
-//   new (): Component;
-// }
-
 export class InputDialog extends BaseComponent implements Composable {
   closeListener?: OnCloseListener;
   submitListener?: OnSubmitListener;
