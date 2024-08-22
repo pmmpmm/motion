@@ -1,5 +1,6 @@
 import { InputDialog } from './components/dialog/dialog.js';
 import { MediaInput } from './components/dialog/input/media-input.js';
+import { TextInput } from './components/dialog/input/text-input.js';
 import { ImageComponent } from './components/page/item/image.js';
 import { NoteComponent } from './components/page/item/note.js';
 import { TaskComponent } from './components/page/item/task.js';
@@ -20,14 +21,27 @@ class App {
         const imageBtn = document.querySelector('#new-image');
         imageBtn.addEventListener('click', () => {
             const dialog = new InputDialog();
-            const imageInput = new MediaInput();
+            const mediaInput = new MediaInput();
             dialog.setOnCloseListener(() => {
                 dialog.removeFrom(dialogRoot);
             });
             dialog.setOnSubmitListener(() => {
                 dialog.removeFrom(dialogRoot);
             });
-            dialog.addChild(imageInput);
+            dialog.addChild(mediaInput);
+            dialog.attachTo(dialogRoot);
+        });
+        const noteBtn = document.querySelector('#new-note');
+        noteBtn.addEventListener('click', () => {
+            const dialog = new InputDialog();
+            const textInput = new TextInput();
+            dialog.setOnCloseListener(() => {
+                dialog.removeFrom(dialogRoot);
+            });
+            dialog.setOnSubmitListener(() => {
+                dialog.removeFrom(dialogRoot);
+            });
+            dialog.addChild(textInput);
             dialog.attachTo(dialogRoot);
         });
     }
