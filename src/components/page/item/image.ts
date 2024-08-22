@@ -1,7 +1,7 @@
 import { BaseComponent } from '../../base.js';
 
 export class ImageComponent extends BaseComponent {
-  constructor(private title: string, private url: string) {
+  constructor(private readonly title: string, private readonly url: string) {
     super(`
       <div class="flex gap-4 w-full">
         <div class="basis-1/2 aspect-video">
@@ -14,8 +14,8 @@ export class ImageComponent extends BaseComponent {
 
     const titleElement = this.element.querySelector('.title') as HTMLParagraphElement;
     titleElement.textContent = this.title;
-    const imageElement = this.element.querySelector('.img') as HTMLImageElement;
 
+    const imageElement = this.element.querySelector('.img') as HTMLImageElement;
     imageElement.src = this.url;
     imageElement.alt = this.title;
   }
