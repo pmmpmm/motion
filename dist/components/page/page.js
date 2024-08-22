@@ -3,7 +3,7 @@ export class PageItemComponent extends BaseComponent {
     constructor() {
         super(`
       <li class="list flex justify-between items-center gap-2 p-6 bg-white shadow-lg">
-        <button class="list-del-btn text-[0px]">삭제
+        <button class="close-btn text-[0px]">삭제
           <svg
             class="fill-basic-40 pointer-events-none"
             stroke="currentColor"
@@ -17,18 +17,29 @@ export class PageItemComponent extends BaseComponent {
           </svg>
         </button>
       </li>`);
+        const closeBtn = this.element.querySelector('.close-btn');
+        closeBtn.onclick = () => {
+            this.closelistener && this.closelistener();
+        };
     }
     addChild(child) {
         child.attachTo(this.element, 'afterbegin');
     }
+    setOnCloseListener(listener) {
+        this.closelistener = listener;
+    }
 }
 export class PageComponent extends BaseComponent {
-    constructor() {
+    constructor(pageItemComponent) {
         super(`<ul class="list-wrap flex flex-col gap-2"></ul>`);
+        this.pageItemComponent = pageItemComponent;
     }
     addChild(section) {
-        const item = new PageItemComponent();
+        const item = new this.pageItemComponent();
         item.addChild(section);
         item.attachTo(this.element, 'afterbegin');
+        item.setOnCloseListener(() => {
+            item.removeFrom(this.element);
+        });
     }
 }
