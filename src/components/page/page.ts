@@ -29,7 +29,7 @@ class PageItemComponent extends BaseComponent<HTMLElement> implements Composable
 }
 export class PageComponent extends BaseComponent<HTMLUListElement> implements Composable {
   constructor() {
-    super('<ul class="list-wrap flex flex-col gap-2"></ul>');
+    super('<ul class="list-section flex flex-col gap-2"></ul>');
   }
   addChild(itemComponent: Component) {
     const item = new PageItemComponent();

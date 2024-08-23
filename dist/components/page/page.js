@@ -24,7 +24,7 @@ class PageItemComponent extends BaseComponent {
 }
 export class PageComponent extends BaseComponent {
     constructor() {
-        super('<ul class="list-wrap flex flex-col gap-2"></ul>');
+        super('<ul class="list-section flex flex-col gap-2"></ul>');
     }
     addChild(itemComponent) {
         const item = new PageItemComponent();
