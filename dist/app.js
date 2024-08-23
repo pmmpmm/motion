@@ -1,7 +1,8 @@
-"use strict";
+import { PageComponent } from './components/page/page.js';
 class App {
-    constructor() {
-        console.log('HELLO WORLD');
+    constructor(pageRoot) {
+        this.page = new PageComponent();
+        this.page.attachTo(pageRoot);
     }
 }
-new App();
+new App(document.querySelector('.page-document'));

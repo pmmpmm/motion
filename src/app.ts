@@ -1,7 +1,11 @@
+import { PageComponent } from './components/page/page.js';
+
 class App {
-  constructor() {
-    console.log('HELLO WORLD');
+  private page;
+  constructor(pageRoot: HTMLElement) {
+    this.page = new PageComponent();
+    this.page.attachTo(pageRoot);
   }
 }
 
-new App();
+new App(document.querySelector('.page-document') as HTMLElement);
