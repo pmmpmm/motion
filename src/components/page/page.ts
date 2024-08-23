@@ -7,7 +7,7 @@ interface Composable {
 class PageItemComponent extends BaseComponent<HTMLElement> implements Composable {
   constructor() {
     super(`
-      <li class="list flex justify-between items-center gap-2 p-6 bg-white shadow-lg">
+      <li class="item flex justify-between items-center gap-2 p-6 bg-white shadow-lg">
         <button class="close-btn text-[0px]">삭제
           <svg
             class="fill-basic-40 pointer-events-none"
