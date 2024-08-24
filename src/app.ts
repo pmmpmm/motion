@@ -5,13 +5,13 @@ import { ImageComponent } from './components/page/item/image.js';
 import { NoteComponent } from './components/page/item/note.js';
 import { TaskComponent } from './components/page/item/task.js';
 import { VideoComponent } from './components/page/item/video.js';
-import { PageComponent } from './components/page/page.js';
+import { PageComponent, PageItemComponent } from './components/page/page.js';
 //https://www.youtube.com/embed/Exize6mpJa0?si=bvMfp9cdttsJFQie
 //https://youtu.be/m7tyQIeSm30?si=ng90l3CLFF3c_11t
 class App {
   private page;
   constructor(pageRoot: HTMLElement, dialogRoot: HTMLElement) {
-    this.page = new PageComponent();
+    this.page = new PageComponent(PageItemComponent);
 
     const image = new ImageComponent('이미지 타이틀', 'https://picsum.photos/500/300');
     const note = new NoteComponent('노트 타이틀', '노트 내용');

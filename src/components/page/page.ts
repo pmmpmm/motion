@@ -3,10 +3,15 @@ import { BaseComponent, Component } from '../base.js';
 interface Composable {
   addChild(child: Component): void;
 }
-
+interface SectionContainer extends Component, Composable {
+  setOnCloseListener(listener: OnCloseListener): void;
+}
 type OnCloseListener = () => void;
+type SectionContainerConstructor = {
+  new (): SectionContainer;
+};
 
-class PageItemComponent extends BaseComponent<HTMLElement> implements Composable {
+export class PageItemComponent extends BaseComponent<HTMLElement> implements SectionContainer {
   private closeListener?: OnCloseListener;
   constructor() {
     super(`
@@ -39,12 +44,12 @@ class PageItemComponent extends BaseComponent<HTMLElement> implements Composable
   }
 }
 
-export class PageComponent extends BaseComponent<HTMLUListElement> implements Composable {
-  constructor() {
+export class PageComponent extends BaseComponent<HTMLElement> implements Composable {
+  constructor(private sectionContainer: SectionContainerConstructor) {
     super('<ul class="list-section flex flex-col gap-2"></ul>');
   }
   addChild(itemComponent: Component) {
-    const item = new PageItemComponent();
+    const item = new this.sectionContainer();
     item.addChild(itemComponent);
     item.attachTo(this.element, 'beforeend');
     item.setOnCloseListener(() => {
