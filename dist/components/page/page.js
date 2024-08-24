@@ -29,6 +29,6 @@ export class PageComponent extends BaseComponent {
     addChild(itemComponent) {
         const item = new PageItemComponent();
         item.addChild(itemComponent);
-        item.attachTo(this.element);
+        item.attachTo(this.element, 'beforeend');
     }
 }

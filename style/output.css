@@ -724,6 +724,10 @@ video {
   margin: auto;
 }
 
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
 .mb-7 {
   margin-bottom: 1.75rem;
 }
@@ -732,8 +736,8 @@ video {
   margin-top: 0.5rem;
 }
 
-.mb-2 {
-  margin-bottom: 0.5rem;
+.-mt-\[1px\] {
+  margin-top: -1px;
 }
 
 .box-border {
@@ -2032,6 +2036,10 @@ video {
   padding-top: 2.25rem;
 }
 
+.pl-1 {
+  padding-left: 0.25rem;
+}
+
 .text-left {
   text-align: left;
 }
@@ -2093,6 +2101,10 @@ video {
   line-height: 1;
 }
 
+.text-\[0px\] {
+  font-size: 0px;
+}
+
 .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -2103,8 +2115,9 @@ video {
   line-height: 1.75rem;
 }
 
-.text-\[0px\] {
-  font-size: 0px;
+.text-base {
+  font-size: 1rem;
+  line-height: 1.5rem;
 }
 
 .font-bold {

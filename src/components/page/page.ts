@@ -27,6 +27,7 @@ class PageItemComponent extends BaseComponent<HTMLElement> implements Composable
     child.attachTo(this.element);
   }
 }
+
 export class PageComponent extends BaseComponent<HTMLUListElement> implements Composable {
   constructor() {
     super('<ul class="list-section flex flex-col gap-2"></ul>');
@@ -34,6 +35,6 @@ export class PageComponent extends BaseComponent<HTMLUListElement> implements Co
   addChild(itemComponent: Component) {
     const item = new PageItemComponent();
     item.addChild(itemComponent);
-    item.attachTo(this.element);
+    item.attachTo(this.element, 'beforeend');
   }
 }
