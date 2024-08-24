@@ -1,3 +1,5 @@
+import { DialogComponent } from './components/dialog/dialog.js';
+import { MediaInputDialog } from './components/dialog/input/media-input.js';
 import { ImageComponent } from './components/page/item/image.js';
 import { NoteComponent } from './components/page/item/note.js';
 import { TaskComponent } from './components/page/item/task.js';
@@ -7,7 +9,7 @@ import { PageComponent } from './components/page/page.js';
 //https://youtu.be/m7tyQIeSm30?si=ng90l3CLFF3c_11t
 class App {
   private page;
-  constructor(pageRoot: HTMLElement) {
+  constructor(pageRoot: HTMLElement, dialogRoot: HTMLElement) {
     this.page = new PageComponent();
 
     const image = new ImageComponent('이미지 타이틀', 'https://picsum.photos/500/300');
@@ -25,7 +27,33 @@ class App {
     this.page.addChild(note);
     this.page.addChild(task);
     this.page.attachTo(pageRoot);
+
+    const imageBtn = document.querySelector('#new-image') as HTMLButtonElement;
+    imageBtn.addEventListener('click', () => {
+      const input = new MediaInputDialog();
+      const dialog = new DialogComponent(input);
+      dialog.attachTo(dialogRoot);
+      dialog.setOnSubmitListener(() => {
+        dialog.removeFrom(dialogRoot);
+      });
+      dialog.setOnCloseListener(() => {
+        dialog.removeFrom(dialogRoot);
+      });
+    });
+
+    const videoBtn = document.querySelector('#new-video') as HTMLButtonElement;
+    videoBtn.addEventListener('click', () => {
+      const input = new MediaInputDialog();
+      const dialog = new DialogComponent(input);
+      dialog.attachTo(dialogRoot);
+      dialog.setOnSubmitListener(() => {
+        dialog.removeFrom(dialogRoot);
+      });
+      dialog.setOnCloseListener(() => {
+        dialog.removeFrom(dialogRoot);
+      });
+    });
   }
 }
 
-new App(document.querySelector('.page-document') as HTMLElement);
+new App(document.querySelector('.page-document') as HTMLElement, document.body);
