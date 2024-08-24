@@ -1,7 +1,7 @@
 import { BaseComponent } from '../../base.js';
 
 export class NoteComponent extends BaseComponent<HTMLElement> {
-  constructor(title: string, body: string) {
+  constructor(private readonly title: string, private readonly body: string) {
     super(`
       <div class="flex flex-col w-full">
         <p class="title text-xl font-medium mb-2"></p>
@@ -11,7 +11,7 @@ export class NoteComponent extends BaseComponent<HTMLElement> {
 
     const titleElement = this.element.querySelector('.title') as HTMLParagraphElement;
     const bodyElement = this.element.querySelector('.body') as HTMLParagraphElement;
-    titleElement.textContent = title;
-    bodyElement.textContent = body;
+    titleElement.textContent = this.title;
+    bodyElement.textContent = this.body;
   }
 }

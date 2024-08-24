@@ -7,9 +7,11 @@ export class NoteComponent extends BaseComponent {
         <p class="body">
         </p>
       </div>`);
+        this.title = title;
+        this.body = body;
         const titleElement = this.element.querySelector('.title');
         const bodyElement = this.element.querySelector('.body');
-        titleElement.textContent = title;
-        bodyElement.textContent = body;
+        titleElement.textContent = this.title;
+        bodyElement.textContent = this.body;
     }
 }
