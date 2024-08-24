@@ -1,5 +1,6 @@
 import { DialogComponent } from './components/dialog/dialog.js';
 import { MediaInputDialog } from './components/dialog/input/media-input.js';
+import { TextInputDialog } from './components/dialog/input/text-input.js';
 import { ImageComponent } from './components/page/item/image.js';
 import { NoteComponent } from './components/page/item/note.js';
 import { TaskComponent } from './components/page/item/task.js';
@@ -34,6 +35,30 @@ class App {
         const videoBtn = document.querySelector('#new-video');
         videoBtn.addEventListener('click', () => {
             const input = new MediaInputDialog();
+            const dialog = new DialogComponent(input);
+            dialog.attachTo(dialogRoot);
+            dialog.setOnSubmitListener(() => {
+                dialog.removeFrom(dialogRoot);
+            });
+            dialog.setOnCloseListener(() => {
+                dialog.removeFrom(dialogRoot);
+            });
+        });
+        const noteBtn = document.querySelector('#new-note');
+        noteBtn.addEventListener('click', () => {
+            const input = new TextInputDialog();
+            const dialog = new DialogComponent(input);
+            dialog.attachTo(dialogRoot);
+            dialog.setOnSubmitListener(() => {
+                dialog.removeFrom(dialogRoot);
+            });
+            dialog.setOnCloseListener(() => {
+                dialog.removeFrom(dialogRoot);
+            });
+        });
+        const taskBtn = document.querySelector('#new-task');
+        taskBtn.addEventListener('click', () => {
+            const input = new TextInputDialog();
             const dialog = new DialogComponent(input);
             dialog.attachTo(dialogRoot);
             dialog.setOnSubmitListener(() => {
