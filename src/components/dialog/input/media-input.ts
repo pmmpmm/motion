@@ -1,6 +1,11 @@
 import { BaseComponent } from '../../base.js';
 
-export class MediaInputDialog extends BaseComponent<HTMLElement> {
+export interface MediaInputData {
+  title: string;
+  url: string;
+}
+
+export class MediaInputDialog extends BaseComponent<HTMLElement> implements MediaInputData {
   constructor() {
     super(`
       <div class="dialogue-input-field flex flex-col gap-4">
