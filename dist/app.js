@@ -5,10 +5,10 @@ import { ImageComponent } from './components/page/item/image.js';
 import { NoteComponent } from './components/page/item/note.js';
 import { TaskComponent } from './components/page/item/task.js';
 import { VideoComponent } from './components/page/item/video.js';
-import { PageComponent } from './components/page/page.js';
+import { PageComponent, PageItemComponent } from './components/page/page.js';
 class App {
     constructor(pageRoot, dialogRoot) {
-        this.page = new PageComponent();
+        this.page = new PageComponent(PageItemComponent);
         const image = new ImageComponent('이미지 타이틀', 'https://picsum.photos/500/300');
         const note = new NoteComponent('노트 타이틀', '노트 내용');
         const task = new TaskComponent('할 일 타이틀', '할 일 1\r할 일 2');

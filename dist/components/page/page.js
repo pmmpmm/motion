@@ -1,5 +1,5 @@
 import { BaseComponent } from '../base.js';
-class PageItemComponent extends BaseComponent {
+export class PageItemComponent extends BaseComponent {
     constructor() {
         super(`
       <li class="item flex justify-between items-center gap-2 p-6 bg-white shadow-lg">
@@ -30,11 +30,12 @@ class PageItemComponent extends BaseComponent {
     }
 }
 export class PageComponent extends BaseComponent {
-    constructor() {
+    constructor(sectionContainer) {
         super('<ul class="list-section flex flex-col gap-2"></ul>');
+        this.sectionContainer = sectionContainer;
     }
     addChild(itemComponent) {
-        const item = new PageItemComponent();
+        const item = new this.sectionContainer();
         item.addChild(itemComponent);
         item.attachTo(this.element, 'beforeend');
         item.setOnCloseListener(() => {
