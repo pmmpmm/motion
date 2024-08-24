@@ -9,16 +9,6 @@ import { PageComponent, PageItemComponent } from './components/page/page.js';
 class App {
     constructor(pageRoot, dialogRoot) {
         this.page = new PageComponent(PageItemComponent);
-        const image = new ImageComponent('이미지 타이틀', 'https://picsum.photos/500/300');
-        const note = new NoteComponent('노트 타이틀', '노트 내용');
-        const task = new TaskComponent('할 일 타이틀', '할 일 1\r할 일 2');
-        const video1 = new VideoComponent('비디오 타이틀', 'https://www.youtube.com/embed/Exize6mpJa0');
-        const video2 = new VideoComponent('비디오 타이틀', 'https://youtu.be/m7tyQIeSm30?si=ng90l3CLFF3c_11t');
-        this.page.addChild(video1);
-        this.page.addChild(video2);
-        this.page.addChild(image);
-        this.page.addChild(note);
-        this.page.addChild(task);
         this.page.attachTo(pageRoot);
         const imageBtn = document.querySelector('#new-image');
         imageBtn.addEventListener('click', () => {
@@ -26,6 +16,8 @@ class App {
             const dialog = new DialogComponent(input);
             dialog.attachTo(dialogRoot);
             dialog.setOnSubmitListener(() => {
+                const image = new ImageComponent(input.title, input.url);
+                this.page.addChild(image);
                 dialog.removeFrom(dialogRoot);
             });
             dialog.setOnCloseListener(() => {
@@ -38,6 +30,8 @@ class App {
             const dialog = new DialogComponent(input);
             dialog.attachTo(dialogRoot);
             dialog.setOnSubmitListener(() => {
+                const video = new VideoComponent(input.title, input.url);
+                this.page.addChild(video);
                 dialog.removeFrom(dialogRoot);
             });
             dialog.setOnCloseListener(() => {
@@ -50,6 +44,8 @@ class App {
             const dialog = new DialogComponent(input);
             dialog.attachTo(dialogRoot);
             dialog.setOnSubmitListener(() => {
+                const note = new NoteComponent(input.title, input.body);
+                this.page.addChild(note);
                 dialog.removeFrom(dialogRoot);
             });
             dialog.setOnCloseListener(() => {
@@ -62,6 +58,8 @@ class App {
             const dialog = new DialogComponent(input);
             dialog.attachTo(dialogRoot);
             dialog.setOnSubmitListener(() => {
+                const task = new TaskComponent(input.title, input.body);
+                this.page.addChild(task);
                 dialog.removeFrom(dialogRoot);
             });
             dialog.setOnCloseListener(() => {
