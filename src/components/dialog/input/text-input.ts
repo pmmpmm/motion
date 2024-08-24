@@ -1,6 +1,11 @@
 import { BaseComponent } from '../../base.js';
 
-export class TextInputDialog extends BaseComponent<HTMLElement> {
+export interface TextInputData {
+  title: string;
+  body: string;
+}
+
+export class TextInputDialog extends BaseComponent<HTMLElement> implements TextInputData {
   constructor() {
     super(`
       <div class="dialogue-input-field flex flex-col gap-4">

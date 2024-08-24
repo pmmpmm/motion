@@ -1,76 +1,63 @@
+import { Component } from './components/base.js';
 import { DialogComponent } from './components/dialog/dialog.js';
-import { MediaInputDialog } from './components/dialog/input/media-input.js';
-import { TextInputDialog } from './components/dialog/input/text-input.js';
+import { MediaInputData, MediaInputDialog } from './components/dialog/input/media-input.js';
+import { TextInputData, TextInputDialog } from './components/dialog/input/text-input.js';
 import { ImageComponent } from './components/page/item/image.js';
 import { NoteComponent } from './components/page/item/note.js';
 import { TaskComponent } from './components/page/item/task.js';
 import { VideoComponent } from './components/page/item/video.js';
 import { PageComponent, PageItemComponent } from './components/page/page.js';
-//https://www.youtube.com/embed/Exize6mpJa0?si=bvMfp9cdttsJFQie
-//https://picsum.photos/500/300
+
+type InputDialogConstructor<T extends (MediaInputData | TextInputData) & Component> = {
+  new (): T;
+};
+
 class App {
   private page;
-  constructor(pageRoot: HTMLElement, dialogRoot: HTMLElement) {
+  constructor(private pageRoot: HTMLElement, private dialogRoot: HTMLElement) {
     this.page = new PageComponent(PageItemComponent);
-    this.page.attachTo(pageRoot);
+    this.page.attachTo(this.pageRoot);
 
-    const imageBtn = document.querySelector('#new-image') as HTMLButtonElement;
-    imageBtn.addEventListener('click', () => {
-      const input = new MediaInputDialog();
+    this.bindElementToDialog<MediaInputDialog>(
+      '#new-image',
+      MediaInputDialog,
+      (MediaInputDialog) => new ImageComponent(MediaInputDialog.title, MediaInputDialog.url)
+    );
+    this.bindElementToDialog<MediaInputDialog>(
+      '#new-video',
+      MediaInputDialog,
+      (MediaInputDialog) => new VideoComponent(MediaInputDialog.title, MediaInputDialog.url)
+    );
+    this.bindElementToDialog<TextInputDialog>(
+      '#new-note',
+      TextInputDialog,
+      (TextInputDialog) => new NoteComponent(TextInputDialog.title, TextInputDialog.body)
+    );
+    this.bindElementToDialog<TextInputDialog>(
+      '#new-task',
+      TextInputDialog,
+      (TextInputDialog) => new TaskComponent(TextInputDialog.title, TextInputDialog.body)
+    );
+  }
+  private bindElementToDialog<T extends (MediaInputData | TextInputData) & Component>(
+    selector: string,
+    inputDialog: InputDialogConstructor<T>,
+    makeListComponent: (input: T) => Component
+  ) {
+    const element = document.querySelector(selector) as HTMLButtonElement;
+    element.addEventListener('click', () => {
+      const input = new inputDialog();
       const dialog = new DialogComponent(input);
-      dialog.attachTo(dialogRoot);
+
+      dialog.attachTo(this.dialogRoot);
+
       dialog.setOnSubmitListener(() => {
-        const image = new ImageComponent(input.title, input.url);
-        this.page.addChild(image);
-        dialog.removeFrom(dialogRoot);
+        const itemComponent = makeListComponent(input);
+        this.page.addChild(itemComponent);
+        dialog.removeFrom(this.dialogRoot);
       });
       dialog.setOnCloseListener(() => {
-        dialog.removeFrom(dialogRoot);
-      });
-    });
-
-    const videoBtn = document.querySelector('#new-video') as HTMLButtonElement;
-    videoBtn.addEventListener('click', () => {
-      const input = new MediaInputDialog();
-      const dialog = new DialogComponent(input);
-      dialog.attachTo(dialogRoot);
-      dialog.setOnSubmitListener(() => {
-        const video = new VideoComponent(input.title, input.url);
-        this.page.addChild(video);
-        dialog.removeFrom(dialogRoot);
-      });
-      dialog.setOnCloseListener(() => {
-        dialog.removeFrom(dialogRoot);
-      });
-    });
-
-    const noteBtn = document.querySelector('#new-note') as HTMLButtonElement;
-    noteBtn.addEventListener('click', () => {
-      const input = new TextInputDialog();
-      const dialog = new DialogComponent(input);
-      dialog.attachTo(dialogRoot);
-      dialog.setOnSubmitListener(() => {
-        const note = new NoteComponent(input.title, input.body);
-        this.page.addChild(note);
-        dialog.removeFrom(dialogRoot);
-      });
-      dialog.setOnCloseListener(() => {
-        dialog.removeFrom(dialogRoot);
-      });
-    });
-
-    const taskBtn = document.querySelector('#new-task') as HTMLButtonElement;
-    taskBtn.addEventListener('click', () => {
-      const input = new TextInputDialog();
-      const dialog = new DialogComponent(input);
-      dialog.attachTo(dialogRoot);
-      dialog.setOnSubmitListener(() => {
-        const task = new TaskComponent(input.title, input.body);
-        this.page.addChild(task);
-        dialog.removeFrom(dialogRoot);
-      });
-      dialog.setOnCloseListener(() => {
-        dialog.removeFrom(dialogRoot);
+        dialog.removeFrom(this.dialogRoot);
       });
     });
   }
