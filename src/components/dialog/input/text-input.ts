@@ -12,8 +12,18 @@ export class TextInputDialog extends BaseComponent<HTMLElement> {
         <div>
           <label for="text-body" class="block pb-1 font-medium">BODY</label>
           <textarea name="body" id="text-body" rows="5" cols="33"
-          class="body-inp block w-full px-4 py-2 border border-solid border-inherit resize-none"></textarea>
+          class="body-inp block w-full px-4 py-2 border border-solid border-inherit whitespace-pre resize-none"></textarea>
         </div>
       </div>`);
+  }
+  get title() {
+    const titleElement = this.element.querySelector('.title-inp') as HTMLInputElement;
+    return titleElement.value;
+  }
+  get body() {
+    const bodyElement = this.element.querySelector('.body-inp') as HTMLTextAreaElement;
+    console.log(bodyElement.value);
+
+    return bodyElement.value;
   }
 }
