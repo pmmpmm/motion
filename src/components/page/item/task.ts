@@ -17,19 +17,30 @@ export class TaskComponent extends BaseComponent<HTMLElement> {
     const itemTemplate = document.createElement('template');
     itemTemplate.innerHTML = `
     <li class="task-item">
-      <label for="todo1" class="text-base">
-        <input type="checkbox" id="todo1" />
+      <label class="text-base">
+        <input type="checkbox" />
         <span class="task inline-block -mt-[1px] pl-1 align-top"></span>
       </label>
     </li>`;
     const itemTemplateContent = itemTemplate.content.firstElementChild as HTMLElement;
 
-    const bodyItem = this.body.split('\r');
-    bodyItem.forEach((itemContent) => {
+    const bodyItem = this.bodyItemToArray(this.body);
+
+    bodyItem.forEach((itemContent, idx) => {
       const item = document.importNode(itemTemplateContent, true);
-      const itemLabel = item.querySelector('.task') as HTMLSpanElement;
-      itemLabel.textContent = itemContent;
+      const itemLabel = item.querySelector('label') as HTMLLabelElement;
+      const itemCheckbox = item.querySelector('input') as HTMLInputElement;
+      const itemText = item.querySelector('.task') as HTMLSpanElement;
+
+      itemLabel.htmlFor = `task-${idx}`;
+      itemCheckbox.id = `task-${idx}`;
+      itemText.textContent = itemContent;
       bodyElement.appendChild(item);
     });
+  }
+  bodyItemToArray(bodyItem: string) {
+    const itemArray = bodyItem.replace(/(?:\r\n|\r|\n|\,)/g, '<br/>').split('<br/>');
+
+    return itemArray.filter((item) => item !== '');
   }
 }

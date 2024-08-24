@@ -21,7 +21,6 @@ export class TextInputDialog extends BaseComponent {
     }
     get body() {
         const bodyElement = this.element.querySelector('.body-inp');
-        console.log(bodyElement.value);
         return bodyElement.value;
     }
 }

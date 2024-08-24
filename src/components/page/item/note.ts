@@ -5,7 +5,7 @@ export class NoteComponent extends BaseComponent<HTMLElement> {
     super(`
       <div class="flex flex-col w-full">
         <p class="title text-xl font-medium mb-2"></p>
-        <p class="body">
+        <p class="body whitespace-pre">
         </p>
       </div>`);
 
