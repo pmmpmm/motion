@@ -17,9 +17,16 @@ class PageItemComponent extends BaseComponent {
           </svg>
         </button>
       </li>`);
+        const closeBtn = this.element.querySelector('.close-btn');
+        closeBtn.onclick = () => {
+            this.closeListener && this.closeListener();
+        };
     }
     addChild(child) {
         child.attachTo(this.element);
+    }
+    setOnCloseListener(listener) {
+        this.closeListener = listener;
     }
 }
 export class PageComponent extends BaseComponent {
@@ -30,5 +37,8 @@ export class PageComponent extends BaseComponent {
         const item = new PageItemComponent();
         item.addChild(itemComponent);
         item.attachTo(this.element, 'beforeend');
+        item.setOnCloseListener(() => {
+            item.removeFrom(this.element);
+        });
     }
 }
