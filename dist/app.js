@@ -12,21 +12,36 @@ class App {
         this.dialogRoot = dialogRoot;
         this.page = new PageComponent(PageItemComponent);
         this.page.attachTo(this.pageRoot);
-        this.bindElementToDialog('#new-image', MediaInputDialog, (MediaInputDialog) => new ImageComponent(MediaInputDialog.title, MediaInputDialog.url));
-        this.bindElementToDialog('#new-video', MediaInputDialog, (MediaInputDialog) => new VideoComponent(MediaInputDialog.title, MediaInputDialog.url));
-        this.bindElementToDialog('#new-note', TextInputDialog, (TextInputDialog) => new NoteComponent(TextInputDialog.title, TextInputDialog.body));
-        this.bindElementToDialog('#new-task', TextInputDialog, (TextInputDialog) => new TaskComponent(TextInputDialog.title, TextInputDialog.body));
+        this.bindElementToDialog('#new-image', MediaInputDialog, (MediaInputDialog) => this.validateInputData(MediaInputDialog, ImageComponent));
+        this.bindElementToDialog('#new-video', MediaInputDialog, (MediaInputDialog) => this.validateInputData(MediaInputDialog, VideoComponent));
+        this.bindElementToDialog('#new-note', TextInputDialog, (TextInputDialog) => this.validateInputData(TextInputDialog, NoteComponent));
+        this.bindElementToDialog('#new-task', TextInputDialog, (TextInputDialog) => this.validateInputData(TextInputDialog, TaskComponent));
     }
-    bindElementToDialog(selector, inputDialog, makeListComponent) {
+    validateInputData(input, itemComponent) {
+        if (('url' in input && (!input.title || !input.url)) ||
+            ('body' in input && (!input.title || !input.body))) {
+            alert('다이얼로그의 빈칸에 내용을 입력해 주세요.');
+            return null;
+        }
+        if ('url' in input) {
+            return new itemComponent(input.title, input.url);
+        }
+        else {
+            return new itemComponent(input.title, input.body);
+        }
+    }
+    bindElementToDialog(selector, inputDialog, makeItemComponent) {
         const element = document.querySelector(selector);
         element.addEventListener('click', () => {
             const input = new inputDialog();
             const dialog = new DialogComponent(input);
             dialog.attachTo(this.dialogRoot);
             dialog.setOnSubmitListener(() => {
-                const itemComponent = makeListComponent(input);
-                this.page.addChild(itemComponent);
-                dialog.removeFrom(this.dialogRoot);
+                const itemComponent = makeItemComponent(input);
+                if (itemComponent) {
+                    this.page.addChild(itemComponent);
+                    dialog.removeFrom(this.dialogRoot);
+                }
             });
             dialog.setOnCloseListener(() => {
                 dialog.removeFrom(this.dialogRoot);
