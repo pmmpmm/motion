@@ -12,6 +12,10 @@ class App {
         this.dialogRoot = dialogRoot;
         this.page = new PageComponent(PageItemComponent);
         this.page.attachTo(this.pageRoot);
+        this.page.addChild(new ImageComponent('이미지 타이틀', 'https://picsum.photos/500/300'));
+        this.page.addChild(new VideoComponent('비디오 타이틀', 'https://youtu.be/Exize6mpJa0'));
+        this.page.addChild(new NoteComponent('노트 타이틀', '노트 내용'));
+        this.page.addChild(new TaskComponent('할 일 타이틀', '할 일1, 할 일2'));
         this.bindElementToDialog('#new-image', MediaInputDialog, (MediaInputDialog) => this.validateInputData(MediaInputDialog, ImageComponent));
         this.bindElementToDialog('#new-video', MediaInputDialog, (MediaInputDialog) => this.validateInputData(MediaInputDialog, VideoComponent));
         this.bindElementToDialog('#new-note', TextInputDialog, (TextInputDialog) => this.validateInputData(TextInputDialog, NoteComponent));
