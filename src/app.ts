@@ -2,7 +2,7 @@ import { Component } from './components/base.js';
 import { DialogComponent } from './components/dialog/dialog.js';
 import { MediaInputData, MediaInputDialog } from './components/dialog/input/media-input.js';
 import { TextInputData, TextInputDialog } from './components/dialog/input/text-input.js';
-import { ImageComponent } from './components/page/item/image.js';
+// import { ImageComponent } from './components/page/item/image.js';
 import { NoteComponent } from './components/page/item/note.js';
 import { TaskComponent } from './components/page/item/task.js';
 import { VideoComponent } from './components/page/item/video.js';
@@ -20,9 +20,9 @@ class App {
     this.page = new PageComponent(PageItemComponent);
     this.page.attachTo(this.pageRoot);
 
-    this.bindElementToDialog<MediaInputDialog>('#new-image', MediaInputDialog, (MediaInputDialog) =>
-      this.validateInputData(MediaInputDialog, ImageComponent)
-    );
+    // this.bindElementToDialog<MediaInputDialog>('#new-image', MediaInputDialog, (MediaInputDialog) =>
+    //   this.validateInputData(MediaInputDialog, ImageComponent)
+    // );
     this.bindElementToDialog<MediaInputDialog>('#new-video', MediaInputDialog, (MediaInputDialog) =>
       this.validateInputData(MediaInputDialog, VideoComponent)
     );

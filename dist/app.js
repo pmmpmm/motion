@@ -1,7 +1,6 @@
 import { DialogComponent } from './components/dialog/dialog.js';
 import { MediaInputDialog } from './components/dialog/input/media-input.js';
 import { TextInputDialog } from './components/dialog/input/text-input.js';
-import { ImageComponent } from './components/page/item/image.js';
 import { NoteComponent } from './components/page/item/note.js';
 import { TaskComponent } from './components/page/item/task.js';
 import { VideoComponent } from './components/page/item/video.js';
@@ -12,7 +11,6 @@ class App {
         this.dialogRoot = dialogRoot;
         this.page = new PageComponent(PageItemComponent);
         this.page.attachTo(this.pageRoot);
-        this.bindElementToDialog('#new-image', MediaInputDialog, (MediaInputDialog) => this.validateInputData(MediaInputDialog, ImageComponent));
         this.bindElementToDialog('#new-video', MediaInputDialog, (MediaInputDialog) => this.validateInputData(MediaInputDialog, VideoComponent));
         this.bindElementToDialog('#new-note', TextInputDialog, (TextInputDialog) => this.validateInputData(TextInputDialog, NoteComponent));
         this.bindElementToDialog('#new-task', TextInputDialog, (TextInputDialog) => this.validateInputData(TextInputDialog, TaskComponent));
