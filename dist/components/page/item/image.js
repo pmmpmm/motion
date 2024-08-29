@@ -4,7 +4,7 @@ export class ImageComponent extends BaseComponent {
         super(`
       <div class="flex gap-4 w-full">
         <div class="basis-1/2 aspect-video">
-          <img class="img w-full h-full object-cover" />
+          <img class="img w-full h-full object-cover" onerror="this.src='/src/assets/defalult_media_img.jpg'"/>
         </div>
         <div class="basis-1/2">
           <p class="title text-xl font-medium mb-2"></p>
